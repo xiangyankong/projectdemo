@@ -11,34 +11,34 @@
 <h1>创建项目</h1>
 <hr>
 <div class="easyui-panel" style="width: 100%;padding:30px 60px">
-    <form id="ff" action="" method="get">
+    <form id="ff" action="addproject" method="get">
         <div style="margin-bottom: 20px">
             <div>
                 项目名称：
             </div>
-            <input class="easyui-textbox" style="width: 100%;height: 32px">
+            <input class="easyui-textbox" name="projectname" style="width: 100%;height: 32px">
         </div>
         <div style="margin-bottom: 20px">
             <div>
                 负责人：
             </div>
-            <input class="easyui-textbox" style="width: 100%;height: 32px">
+            <input class="easyui-textbox" name="principal" style="width: 100%;height: 32px">
         </div>
         <div style="margin-bottom: 20px">
             <div>
                 验收人：
             </div>
-            <input class="easyui-textbox" style="width: 100%;height: 32px">
+            <input class="easyui-textbox" name="acceptor" style="width: 100%;height: 32px">
         </div>
         <div style="margin-bottom: 20px">
                 <td>验收时间：</td>
-                <td><input class="easyui-datebox" data-options="formatter:myformatter,parser:myparser"></td>
+                <td><input class="easyui-datebox" name="endtime" data-options="formatter:myformatter,parser:myparser"></td>
         </div>
         <div style="margin-bottom: 20px">
             <div>
                 项目详情：
             </div>
-            <input class="easyui-textbox" data-options="multiline:true" style="width: 100%;height: 100px">
+            <input class="easyui-textbox" name="details" data-options="multiline:true" style="width: 100%;height: 100px">
         </div>
     </form>
     <div style="text-align: center;padding: 5px">
@@ -49,8 +49,12 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.easyui.min.js"></script>
 <script>
-    function submitForm() {
-        $('#ff').form('submit');
+    function submitForm(){
+        $('#ff').form('submit',{
+            onSubmit:function(){
+                return $(this).form('enableValidation').form('validate');
+            }
+        });
     }
     function clearForm() {
         $('#ff').form('clear');

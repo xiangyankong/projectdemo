@@ -13,6 +13,9 @@ public class Project {
     private Date end_time;
     private String details;
 
+    public Project() {
+    }
+
     public Project(int id, String project_name, int status, Date create_time, int creator_id, int principal_id,
                    int acceptor_id, Date end_time, String details) {
         this.id = id;
@@ -96,5 +99,20 @@ public class Project {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", project_name='" + project_name + '\'' +
+                ", status=" + status +
+                ", create_time=" + create_time +
+                ", creator_id=" + creator_id +
+                ", principal_id=" + principal_id +
+                ", acceptor_id=" + acceptor_id +
+                ", end_time=" + end_time +
+                ", details='" + details + '\'' +
+                '}';
     }
 }
