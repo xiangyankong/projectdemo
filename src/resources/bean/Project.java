@@ -1,20 +1,20 @@
 package resources.bean;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Project {
     private int id;
     private String project_name;
     private int status;
-    private Timestamp create_time;
+    private Date create_time;
     private int creator_id;
     private int principal_id;
     private int acceptor_id;
-    private Timestamp start_time;
-    private Timestamp end_time;
+    private Date end_time;
     private String details;
 
-    public Project(int id, String project_name, int status, Timestamp create_time, int creator_id, int principal_id, int acceptor_id, Timestamp start_time, Timestamp end_time, String details) {
+    public Project(int id, String project_name, int status, Date create_time, int creator_id, int principal_id,
+                   int acceptor_id, Date end_time, String details) {
         this.id = id;
         this.project_name = project_name;
         this.status = status;
@@ -22,7 +22,6 @@ public class Project {
         this.creator_id = creator_id;
         this.principal_id = principal_id;
         this.acceptor_id = acceptor_id;
-        this.start_time = start_time;
         this.end_time = end_time;
         this.details = details;
     }
@@ -51,11 +50,11 @@ public class Project {
         this.status = status;
     }
 
-    public Timestamp getCreate_time() {
+    public Date getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Timestamp create_time) {
+    public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
 
@@ -83,19 +82,11 @@ public class Project {
         this.acceptor_id = acceptor_id;
     }
 
-    public Timestamp getStart_time() {
-        return start_time;
-    }
-
-    public void setStart_time(Timestamp start_time) {
-        this.start_time = start_time;
-    }
-
-    public Timestamp getEnd_time() {
+    public Date getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Timestamp end_time) {
+    public void setEnd_time(Date end_time) {
         this.end_time = end_time;
     }
 
