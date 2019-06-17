@@ -7,8 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class ProjectDaoImpl implements ProjectDao {
     @Override
@@ -20,10 +23,15 @@ public class ProjectDaoImpl implements ProjectDao {
         try {
             ps = c.prepareStatement(sql);
             ps.setString(1, project.getProject_name());
-            ps.setDate(2, project.getCreate_time());
+            //创建时间
+            Date date = new Date();
+            project.setCreate_time(date);
+            java.sql.Date sqlDate = new java.sql.Date(project.getCreate_time().getTime());
+            ps.setDate(2, sqlDate);
+
             ps.setInt(3, project.getPrincipal_id());
             ps.setInt(4, project.getAcceptor_id());
-            ps.setDate(5, project.getEnd_time());
+            ps.setDate(5,new java.sql.Date(project.getEnd_time().getTime()));
             ps.setString(6, project.getDetails());
             ps.execute();
         } catch (SQLException e) {
@@ -55,8 +63,10 @@ public class ProjectDaoImpl implements ProjectDao {
             ps.setInt(3, project.getCreator_id());
             ps.setInt(4, project.getPrincipal_id());
             ps.setInt(5, project.getAcceptor_id());
-            ps.setDate(6, project.getEnd_time());
+            java.sql.Date sqlDate = new java.sql.Date(project.getEnd_time().getTime());
+            ps.setDate(6, sqlDate);
             ps.setString(7, project.getDetails());
+            ps.setInt(8,project.getId());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -201,10 +211,10 @@ public class ProjectDaoImpl implements ProjectDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         int id = -1;
-        String sql = "select id from mydb.users where = user_name=?";
+        String sql = "select id from mydb.users where user_name= ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, name);
+            ps.setString(1,"'" +name+"'");
             rs = ps.executeQuery();
             if (rs.next()) {
                 id = rs.getInt("id");
