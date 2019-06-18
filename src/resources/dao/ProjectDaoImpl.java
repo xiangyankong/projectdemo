@@ -7,32 +7,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 public class ProjectDaoImpl implements ProjectDao {
     @Override
     public void add(Project project) {
         Connection c = new DBHelp().getConnection();
         PreparedStatement ps = null;
-        String sql = "insert into mydb.project(project_name,create_time,principal_id,acceptor_id, end_time,details) " +
-                "values (?,?,?,?,?,?)";
+        String sql = "insert into mydb.project(project_name,status,create_time,principal_id,acceptor_id, end_time,details) " +
+                "values (?,?,?,?,?,?,?)";
         try {
             ps = c.prepareStatement(sql);
             ps.setString(1, project.getProject_name());
+            ps.setInt(2,project.getStatus());
             //创建时间
             Date date = new Date();
             project.setCreate_time(date);
             java.sql.Date sqlDate = new java.sql.Date(project.getCreate_time().getTime());
-            ps.setDate(2, sqlDate);
+            ps.setDate(3, sqlDate);
 
-            ps.setInt(3, project.getPrincipal_id());
-            ps.setInt(4, project.getAcceptor_id());
-            ps.setDate(5,new java.sql.Date(project.getEnd_time().getTime()));
-            ps.setString(6, project.getDetails());
+            ps.setInt(4, project.getPrincipal_id());
+            ps.setInt(5, project.getAcceptor_id());
+            ps.setDate(6,new java.sql.Date(project.getEnd_time().getTime()));
+            ps.setString(7, project.getDetails());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -210,12 +209,13 @@ public class ProjectDaoImpl implements ProjectDao {
         Connection connection = new DBHelp().getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        int id = -1;
+        int id = 0;
         String sql = "select id from mydb.users where user_name= ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1,"'" +name+"'");
+            ps.setString(1,name);
             rs = ps.executeQuery();
+//            System.out.println(rs.next());
             if (rs.next()) {
                 id = rs.getInt("id");
             }
@@ -224,4 +224,5 @@ public class ProjectDaoImpl implements ProjectDao {
         }
         return id;
     }
+
 }

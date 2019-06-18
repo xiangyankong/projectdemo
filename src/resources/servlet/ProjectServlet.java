@@ -26,6 +26,7 @@ public class ProjectServlet extends HttpServlet {
         ProjectDaoImpl projectDao = new ProjectDaoImpl();
         System.out.println(projectname + " " + principal + " " + acceptor + "\n" + endtime + "\n" + details);
         project.setProject_name(projectname);
+        project.setStatus(1);
         project.setPrincipal_id(projectDao.getId(principal));
         project.setAcceptor_id(projectDao.getId(acceptor));
 

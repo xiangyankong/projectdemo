@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/themes/default/easyui.css">
+    <link rel="stylesheet" href="css/themes/icon.css">
+    <link rel="stylesheet" href="css/themes/">
+    <title>登录</title>
+</head>
+<body>
+<h2>登录</h2>
+<div style="margin:20px 0;"></div>
+<div class="easyui-panel" title="login" style="width: 400px">
+    <div style="padding:10px 60px 20px 60px">
+        <form action="login" id="ff" method="post">
+            <table cellpadding="5">
+                <tr>
+                    <td>用户名：</td>
+                    <td><input class="easyui-textbox" type="text" name="username" data-options="required:true"></td>
+                </tr>
+                <tr>
+                    <td>密码：</td>
+                    <td><input class="easyui-textbox" type="password" name="password" data-options="required:true"></td>
+                </tr>
+            </table>
+        </form>
+        <div style="text-align: center;padding: 5px;">
+            <a href="javascript:void(0)" class="easyui-linkbutton">登录</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton">重置</a>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easyui.min.js"></script>
+<script>
+    function submitForm(){
+        $('#ff').form('submit');
+    }
+    function clearForm(){
+        $('#ff').form('clear');
+    }
+</script>
+</body>
+</html>
